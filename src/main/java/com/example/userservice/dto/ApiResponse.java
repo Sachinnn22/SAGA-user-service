@@ -15,7 +15,6 @@ public class ApiResponse<T> {
     private T data;
     private String error;
 
-    // Success response ekakata
     public static <T> ApiResponse<T> success(String message, T data) {
         return ApiResponse.<T>builder()
                 .success(true)
@@ -24,7 +23,6 @@ public class ApiResponse<T> {
                 .build();
     }
 
-    // Error response ekakata
     public static <T> ApiResponse<T> error(String message, String error) {
         return ApiResponse.<T>builder()
                 .success(false)

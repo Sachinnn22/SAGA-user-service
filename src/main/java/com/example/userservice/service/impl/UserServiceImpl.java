@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    // Note: Password encoder (BCrypt) eka pawichchi karanna amathaka karanna epa!
 
     @Override
     public UserResponseDto registerUser(UserRegisterDto dto) {
@@ -24,7 +23,7 @@ public class UserServiceImpl implements UserService {
         User user = User.builder()
                 .name(dto.getName())
                 .email(dto.getEmail())
-                .password(dto.getPassword()) // Password encrypt karala danna (BCrypt)
+                .password(dto.getPassword()) 
                 .phone(dto.getPhone())
                 .role(dto.getRole() != null ? dto.getRole() : "CUSTOMER")
                 .build();
