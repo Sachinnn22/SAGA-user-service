@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
         return mapToDto(user);
     }
 
-    @Override
+   @Override
     public AuthResponseDto loginUser(UserLoginDto loginDto) {
         User user = userRepository.findByEmail(loginDto.getEmail())
                 .orElseThrow(() -> new RuntimeException("Invalid email or password"));
@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("Invalid email or password");
         }
 
-        String accessToken = jwtUtil.generateAccessToken(user.getEmail(), user.getRole());
+        String accessToken = jwtUtil.generateAccessToken(user.getId(), user.getEmail(), user.getRole());
         String refreshToken = jwtUtil.generateRefreshToken(user.getEmail());
 
         return AuthResponseDto.builder()
