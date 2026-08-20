@@ -1,5 +1,6 @@
 package com.example.userservice.controller;
 
+import com.example.userservice.dto.UserLoginDto;
 import com.example.userservice.dto.UserRegisterDto;
 import com.example.userservice.dto.UserResponseDto;
 import com.example.userservice.dto.ApiResponse;
@@ -23,13 +24,18 @@ public class UserController {
                 .body(ApiResponse.success("User registered successfully", responseDto));
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<ApiResponse<UserResponseDto>> loginUser(@RequestBody UserLoginDto loginDto) {
+        UserResponseDto responseDto = userService.loginUser(loginDto);
+        return ResponseEntity.ok(ApiResponse.success("Login successful", responseDto));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<UserResponseDto>> getUserById(@PathVariable Long id) {
         UserResponseDto responseDto = userService.getUserById(id);
         return ResponseEntity.ok(ApiResponse.success("User fetched successfully", responseDto));
     }
 
-    // Gateway eken inject karana Header values catch karana widiha
     @GetMapping("/profile")
     public ResponseEntity<ApiResponse<UserResponseDto>> getProfile(@RequestHeader("X-User-Email") String email) {
         UserResponseDto responseDto = userService.getUserByEmail(email);
