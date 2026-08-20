@@ -1,5 +1,6 @@
 package com.example.userservice.controller;
 
+import com.example.userservice.dto.AuthResponseDto; // 👈 මේක අනිවාර්යයෙන් ඉම්පෝට් වෙන්න ඕන
 import com.example.userservice.dto.UserLoginDto;
 import com.example.userservice.dto.UserRegisterDto;
 import com.example.userservice.dto.UserResponseDto;
@@ -25,9 +26,9 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<ApiResponse<UserResponseDto>> loginUser(@RequestBody UserLoginDto loginDto) {
-        UserResponseDto responseDto = userService.loginUser(loginDto);
-        return ResponseEntity.ok(ApiResponse.success("Login successful", responseDto));
+    public ResponseEntity<ApiResponse<AuthResponseDto>> loginUser(@RequestBody UserLoginDto loginDto) {
+        AuthResponseDto authResponse = userService.loginUser(loginDto);
+        return ResponseEntity.ok(ApiResponse.success("Login successful", authResponse));
     }
 
     @GetMapping("/{id}")
