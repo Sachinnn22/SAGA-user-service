@@ -8,5 +8,5 @@ public class UserRegisterDto {
     private String email;
     private String password;
     private String phone;
-    private String role; // CUSTOMER or SALON_OWNER
+    private String role; 
 }

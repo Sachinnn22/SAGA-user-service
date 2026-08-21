@@ -28,5 +28,5 @@ public class User {
 
     private String phone;
 
-    private String role; // CUSTOMER, SALON_OWNER, ADMIN
+    private String role; 
 }
