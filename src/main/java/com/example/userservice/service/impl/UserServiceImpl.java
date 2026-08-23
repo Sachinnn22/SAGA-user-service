@@ -11,6 +11,9 @@ import com.example.userservice.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List; 
+import java.util.stream.Collectors; 
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -51,7 +54,15 @@ public class UserServiceImpl implements UserService {
         return mapToDto(user);
     }
 
-   @Override
+    @Override
+    public List<UserResponseDto> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        return users.stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public AuthResponseDto loginUser(UserLoginDto loginDto) {
         User user = userRepository.findByEmail(loginDto.getEmail())
                 .orElseThrow(() -> new RuntimeException("Invalid email or password"));

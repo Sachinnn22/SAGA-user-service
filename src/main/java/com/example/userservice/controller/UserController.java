@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List; 
+
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
@@ -41,5 +43,11 @@ public class UserController {
     public ResponseEntity<ApiResponse<UserResponseDto>> getProfile(@RequestHeader("X-User-Email") String email) {
         UserResponseDto responseDto = userService.getUserByEmail(email);
         return ResponseEntity.ok(ApiResponse.success("Profile fetched successfully", responseDto));
+    }
+
+    @GetMapping("/admin/users")
+    public ResponseEntity<ApiResponse<List<UserResponseDto>>> getAllUsers() {
+        List<UserResponseDto> users = userService.getAllUsers();
+        return ResponseEntity.ok(ApiResponse.success("All users fetched successfully", users));
     }
 }
